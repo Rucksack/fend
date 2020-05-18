@@ -1,10 +1,27 @@
-var path = require('path')
-const express = require('express')
-const mockAPIResponse = require('./mockAPI.js')
+let path = require('path');
+const express = require('express');
+const mockAPIResponse = require('./mockAPI.js');
+const dotenv = require('dotenv');
+dotenv.config();
+const aylien = require('aylien_textapi');
 
 const app = express()
 
 app.use(express.static('dist'))
+
+// set aylien API credentials
+let textapi = new aylien({
+    application_id: process.env.API_ID,
+    application_key: process.env.API_KEY
+})
+
+textapi.sentiment({
+    'text': 'John is a very good football player!'
+}, function(error, response){
+    if (error === null){
+        console.log(response);
+    }
+});
 
 console.log(__dirname)
 
