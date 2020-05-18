@@ -13,13 +13,12 @@ module.exports = merge(common, {
     module: {
         rules: [
             {
-                test: '/\.js$/',
-                exclude: /node_modules/,
-                loader: "babel-loader"
+                test: /\.scss$/,
+                use: [ MiniCssExtractPlugin, 'css-loader', 'sass-loader']
             }
         ]
     },
     plugins: [
-        
+        new MiniCssExtractPlugin({filename: '[name].css'})
     ]
 });
