@@ -1,12 +1,8 @@
-// Setup empty JS object to act as endpoint for all routes
-projectData = {};
-
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('webpack-body-parser');
 
 const path = require('path');
-const mockAPIResponse = require('./mockAPI.js');
 const dotenv = require('dotenv');
 dotenv.config();
 const aylien = require('aylien_textapi');
@@ -28,12 +24,14 @@ app.use(cors());
 app.use(express.static('dist'))
 
 // set aylien API credentials
-let textapi = new aylien({
+const textapi = new aylien({
     application_id: process.env.API_ID,
     application_key: process.env.API_KEY
 })
 
 console.log(__dirname)
+
+
 
 // Routes
 app.get('/', function (req, res) {
@@ -41,19 +39,17 @@ app.get('/', function (req, res) {
     res.sendFile(path.resolve('src/client/views/index.html'))
 });
 
-app.get('/test', function (req, res) {
-    res.send(mockAPIResponse)
-});
-
 app.post('/sentiment', (req, res)=>{
-    textapi.sentiment(
-        req.body, 
+    console.log("sending API request");
+    
+    textapi.sentiment(req.body, 
         (error, responseApi)=>{
             if(error === null){
                 res.send(responseApi);
+                console.log("API response received");
             }
         }
-    );
+    )
 });
 
 // designates what port the app will listen to for incoming requests

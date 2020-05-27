@@ -18,21 +18,55 @@
 
         <main>
             <section>
+                <h1>Sentiment Analysis</h1>
                 <form class="" onsubmit="return Client.handleSubmit(event)">
-                    <input id="name" type="text" name="input" value="" placeholder="Text">
+                    <input id="name" type="text" name="input" value="" placeholder="Input">
+                    <fieldset>
+                        <div id="input-block-text">
+                            <input type="radio" id="input-text" name="input-type" value="Text" checked=checked>
+                            <label for="text">Text</label>
+                        </div>
+                        <div id="input-block-url">
+                            <input type="radio" id="input-url" name="input-type" value="URL">
+                            <label for="url">URL</label>
+                        </div>
+                    </fieldset>
                     <input type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return Client.handleSubmit(event)">
                 </form>
             <section>
 
             <section>
                 <strong>Form Results:</strong>
-                <div id="results"></div>
+                <div id="results">
+                    <div>
+                        <h3>Text:</h3>
+                        <div id="nlp-text" class="result-text"></div>
+                    </div>
+                    <div>
+                        <h3>Polarity</h3>
+                        <div id="nlp-polarity" class="result-text"></div>
+                        <div id="nlp-polarity-confidence" class="result-text"></div>
+                    </div>
+                    <div>
+                        <h3>Subjectivity</h3>
+                        <div id="nlp-subjectivity" class="result-text"></div>
+                        <div id="nlp-subjectivity-confidence" class="result-text"></div>
+                    </div>
+                </div>
             </section>
         </main>
 
         <footer>
             <p>This is a footer</p>
         </footer>
-
+        <script>
+            // Check that service workers are supported
+            if ('serviceWorker' in navigator) {
+                // Use the window load event to keep the page load performant
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/service-worker.js');
+                });
+            }
+        </script>
     </body>
 </html>
