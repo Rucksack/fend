@@ -11,7 +11,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "This application uses aylienAPI to request a Sentiment Analysis[here](https://docs.aylien.com/textapi/endpoints/#sentiment-analysis) on a given text or url. An url input is validated against a number of criteria. By submitting a post request is being send to the server and then an api-request by the server to the aylien-api.\r A response from the aylien-api is then send to the client which updates the results field at the bottom of the webpage.",
   "dependencies": {
     "aylien_textapi": "^0.7.0",
     "cors": "^2.8.5",
@@ -38,5 +38,8 @@
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^4.2.2",
     "workbox-webpack-plugin": "^5.1.3"
+  },
+  "directories": {
+    "test": "tests"
   }
 }
